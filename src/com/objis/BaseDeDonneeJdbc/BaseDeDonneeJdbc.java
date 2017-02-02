@@ -11,10 +11,10 @@ public class BaseDeDonneeJdbc
 			//CREATON DU STATEMENT
 			Statement myStmt = myConn.createStatement();
 			//EXECUTER SQL QUERY
-			ResultSet myRs = myStmt.executeQuery("SELECT * FROM personne");
+			ResultSet myRs = myStmt.executeQuery("SELECT * FROM personne, candidat");
 				while (myRs.next())
 				{
-						System.out.println(myRs.getString("prenom_personne") + ", " + myRs.getString("mail"));
+						System.out.println(myRs.getString("prenom_personne") + ", " + myRs.getString("mail") + ", " + myRs.getString("nom_candidat"));
 				}
 			}
 		catch (Exception exc){

@@ -6,15 +6,15 @@ public class BaseDeDonneeJdbc
 	public static void main (String[] args)
 	{
 		try{
-			//CONNECTION TO DATABASE
+			//Connexion à la base de donnée
 			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inscriptionSportive", "root" , "");
 			//CREATON DU STATEMENT
-			Statement myStmt = myConn.createStatement();
-			//EXECUTER SQL QUERY
-			ResultSet myRs = myStmt.executeQuery("SELECT * FROM personne, candidat");
-				while (myRs.next())
+			Statement stmt = myConn.createStatement();
+			//srcipt sql recuperation resultat
+			ResultSet resultat = stmt.executeQuery("SELECT * FROM personne, candidat");
+				while (resultat.next())
 				{
-						System.out.println(myRs.getString("prenom_personne") + ", " + myRs.getString("mail") + ", " + myRs.getString("nom_candidat"));
+						System.out.println(resultat.getString("prenom_personne") + ", " + resultat.getString("mail") + ", " + resultat.getString("nom_candidat"));
 				}
 			}
 		catch (Exception exc){

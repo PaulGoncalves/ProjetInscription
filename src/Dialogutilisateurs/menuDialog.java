@@ -15,9 +15,9 @@ import utilitaires.ligneDeCommande.Option;
 public class menuDialog {
 	
 	static final Inscriptions inscription = Inscriptions.getInscriptions();
-	static Menu menuPrincipal = new Menu("Bienvenue \nFaites votre choix\n--------------------\n");
-	static Menu menuPersonne = new Menu("\nMenu des personnes et equipes\n--------------------\n");
-	static Menu menuCompet = new Menu("\nMenu des compétitons\n--------------------\n");
+	static Menu menuPrincipal = new Menu("Bienvenue");
+	static Menu menuPersonne = new Menu("Menu des personnes et equipes");
+	static Menu menuCompet = new Menu("Menu des compétitons");
 	
 //Renvoie la liste des personnes
 	public static List<Personne> GetPers()
@@ -94,7 +94,7 @@ public class menuDialog {
 				String prenom = utilitaires.EntreesSorties.getString("Saisir le prenom : ");
 				String mail = utilitaires.EntreesSorties.getString("Saisir l'adresse mail : ");
 				Personne pers = inscription.createPersonne(nom, prenom, mail);
-				System.out.println("Le nom est : " + nom + ", le prenom : " + prenom + ", l'adresse mail : " + mail );
+				System.out.println("Nom : " + nom + ", Prenom : " + prenom + ", Adresse mail : " + mail );
 				SortedSet<Candidat> candidats = inscription.getCandidats();
 				List<Personne> personnes = new ArrayList<>();
 				for (Candidat candidat : candidats)
@@ -115,7 +115,7 @@ public class menuDialog {
         	{
         		String nomEquipe = utilitaires.EntreesSorties.getString("Saisir le nom de l'equipe : ");
         		Equipe team = inscription.createEquipe(nomEquipe);
-        		System.out.println("Le nom de l'equipe est : " + nomEquipe );
+        		System.out.println("Nom de l'equipe : " + nomEquipe );
     			SortedSet<Candidat> candidats = inscription.getCandidats();
     			List<Equipe> equipe = new ArrayList<>();
     			for (Candidat candidat : candidats)
@@ -175,12 +175,12 @@ public class menuDialog {
 	   			element.setPrenom(prenom);
 				String mail = utilitaires.EntreesSorties.getString("Saisissez l'adresse mail : ");
 				element.setMail(mail);
-	   			System.out.println("Les nouvelles informations sont :\nNom : " + nom +"\nPrenom : "+prenom+"\nMail : "+mail );
+	   			System.out.println("Voici les nouvelles informations :\nNom : " + nom +"\nPrenom : "+prenom+"\nMail : "+mail );
     		}
 
 			@Override
 			public Option getOption(Personne element) {
-				// TODO Auto-generated method stub
+			
 				
 				return null;
 			}
@@ -201,12 +201,12 @@ public class menuDialog {
 			{
 				String nomEquipe = utilitaires.EntreesSorties.getString("Saisir le nom de l'equipe : ");
 				element.setNom(nomEquipe);
-				System.out.println("Le nouveau nom d'equipe est " + nomEquipe);
+				System.out.println("Voici le nouveau nom d'équipe : " + nomEquipe);
 				}
 
 			@Override
 			public Option getOption(Equipe element) {
-				// TODO Auto-generated method stub
+		
 				return null;
 			}
 		});
@@ -229,7 +229,7 @@ public class menuDialog {
 
 			@Override
 			public Option getOption(Personne element) {
-				// TODO Auto-generated method stub
+			
 				return null;
 			}
 		});
@@ -252,7 +252,7 @@ public class menuDialog {
 
 			@Override
 			public Option getOption(Equipe element) {
-				// TODO Auto-generated method stub
+			
 				return null;
 			}
 		});
@@ -270,7 +270,7 @@ public class menuDialog {
 			public void optionSelectionnee() 
 			{
 				boolean enEquipe=false;
-				String Statut = "competition en solo";
+				String Statut = "competition seul";
 				String date = utilitaires.EntreesSorties.getString("Date de cloture (ex: 2011-12-03) : ");
 				LocalDate dateCloture= LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE);	
 				String nomCompet = utilitaires.EntreesSorties.getString("Nom de la competition : ");
@@ -303,9 +303,9 @@ public class menuDialog {
 	    					listCompet.add((Competition) competition);
 	    			for(int i = 0; i <= listCompet.size()-1; i++)
 	    				{
-	    				System.out.print("Le nom de la competition est : ");
+	    				System.out.print("Nom de la competition : ");
 	    				System.out.print(listCompet.get(i).getNom());
-	    				System.out.println(", la date de cloture sera le : ");
+	    				System.out.println(", Date de cloture : ");
 	    				if(listCompet.get(i).getDateCloture() == null)
 	    				System.out.println("Aucune date de cloture n'a ete prevu");
 	    				else
@@ -329,7 +329,7 @@ public class menuDialog {
 					try
 					{
 						element.setDateCloture(Cloture);
-						System.out.println("La nouvelle date de cloture est : " + Cloture );
+						System.out.println("Nouvelle date de cloture : " + Cloture );
 					} 
 					catch (Exception e) 
 					{
@@ -341,7 +341,7 @@ public class menuDialog {
 
 				@Override
 				public Option getOption(Competition element) {
-					// TODO Auto-generated method stub
+					
 					return null;
 				}
 			});
@@ -364,7 +364,7 @@ public class menuDialog {
 
 				@Override
 				public Option getOption(Competition element) {
-					// TODO Auto-generated method stub
+					
 					return null;
 				}
 			});
@@ -398,7 +398,7 @@ public class menuDialog {
 
 								@Override
 								public Option getOption(Competition element) {
-									// TODO Auto-generated method stub
+						
 									return null;
 								}
 								
@@ -407,7 +407,7 @@ public class menuDialog {
 
 				@Override
 				public Option getOption(Personne element) {
-					// TODO Auto-generated method stub
+				
 					return null;
 				}
 			});

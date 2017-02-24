@@ -1,3 +1,5 @@
+package Test;
+
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
@@ -15,7 +17,6 @@ public class CompetitionTest {
 
  @Test
  public void testCompetition() {
-  fail("Not yet implemented");
   
   
  }
@@ -31,8 +32,8 @@ public class CompetitionTest {
  public void testSetNom() {
   inscriptions.Inscriptions inscriptions = getInscriptions();
   Competition compet = inscriptions.createCompetition("x", null, true);
-  compet.setNom("x");
-  assertEquals("x", compet.getNom());
+  compet.setNom("op");
+  assertEquals("op", compet.getNom());
  }
 
  @Test

@@ -17,7 +17,7 @@ public class menuDialog {
 	static final Inscriptions inscription = Inscriptions.getInscriptions();
 	static Menu menuPrincipal = new Menu("Bienvenue");
 	static Menu menuPersonne = new Menu("Menu des personnes et equipes");
-	static Menu menuCompet = new Menu("Menu des compétitons");
+	static Menu menuCompet = new Menu("Menu des compétitons","là");
 	
 //Renvoie la liste des personnes
 	public static List<Personne> GetPers()
@@ -63,21 +63,14 @@ public class menuDialog {
 			}			
 		};
 		
-		Option inscrit = new Option("Personnes et equipes", "1", inscri);
+		Option inscrit = getMenuCompet();//new menu("Personnes et equipes", "1", inscri);
 		
-		Action compet = new Action()
-		{
-			@Override
-			public void optionSelectionnee()
-			{
-				getMenuCompet();	
-			}
-		};
 		
-		Option competi = new Option("Compétitions", "2", compet);
+		
+		//Option competi = new Option("Compétitions", "2", compet);
 		
 		menuPrincipal.ajoute(inscrit);
-		menuPrincipal.ajoute(competi);
+		menuPrincipal.ajoute(getMenuCompet());
 		menuPrincipal.ajouteQuitter("q");
 		menuPrincipal.start();
 	}
@@ -262,7 +255,7 @@ public class menuDialog {
 	}
 
 //Menu competitions
-	public static void getMenuCompet()
+	public static Option getMenuCompet()
 	{
 		 Action ajoutCompet = new Action()
 		 {
@@ -417,7 +410,7 @@ public class menuDialog {
 			menuCompet.ajoute(AddPersonne);
 			
 	        menuCompet.ajouteRevenir("r");
-	        menuCompet.start();
+	        return menuCompet;
 	}
 
 

@@ -8,6 +8,7 @@ public class BaseDeDonneeJdbc
 		try{
 			//Chargement du dirver
 			Class.forName("com.mysql.jdbc.Driver");
+			//Info de connexion à la base de donnée
 			String url = "jdbc:mysql://localhost:3306/inscriptionsportive";
 			String login = "root";
 			String mdp = "";

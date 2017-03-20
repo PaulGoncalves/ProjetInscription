@@ -2,58 +2,90 @@ package Test;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+
 import org.junit.Test;
+
+import inscriptions.Competition;
+import inscriptions.Equipe;
+import inscriptions.Inscriptions;
+import inscriptions.Personne;
 
 public class PersonneTest {
 
 	@Test
 	public void testDelete() {
-		fail("Not yet implemented");
+		
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		Personne Personne = inscriptions.createPersonne("a", "b", "c");
+		Competition compet = inscriptions.createCompetition("d", LocalDate.of(2016,12,31),false);
+		compet.add(Personne);
+		Personne.delete();
+		assertTrue(!inscriptions.getCandidats().contains(Personne));
+		assertTrue(!compet.getCandidats().contains(Personne));
+		
 	}
+
+
 
 	@Test
 	public void testToString() {
-		fail("Not yet implemented");
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		Personne Personne = inscriptions.createPersonne("a", "b", "c");
+		assertNotNull(Personne.toString());
+
+				
 	}
 
-	@Test
-	public void testPersonne() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testGetPrenom() {
-		fail("Not yet implemented");
-	}
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		Personne Personne = inscriptions.createPersonne("a", "b", "c");
+		String inscri = Personne.getPrenom();
+		assertEquals("b",inscri);
+		}
 
 	@Test
 	public void testSetPrenom() {
-		fail("Not yet implemented");
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		Personne Personne = inscriptions.createPersonne("a", "b", "c");
+		Personne.setPrenom("d");
+		String inscri = Personne.getPrenom();
+		assertEquals("d",inscri);
 	}
 
 	@Test
 	public void testGetMail() {
-		fail("Not yet implemented");
+		Inscriptions inscri = Inscriptions.getInscriptions();
+		Personne Personne = inscri.createPersonne("a", "b", "c");
+		String m = Personne.getMail();
+		assertEquals("c",m);
 	}
-
 	@Test
+	
 	public void testSetMail() {
-		fail("Not yet implemented");
+		Inscriptions inscri = Inscriptions.getInscriptions();
+		Personne Personne = inscri.createPersonne("a", "b", "c");
+		Personne.setMail("d");
+		String m = Personne.getMail();
+		assertEquals("d",m);
 	}
 
 	@Test
 	public void testGetEquipes() {
-		fail("Not yet implemented");
-	}
+		
+		Inscriptions inscri = Inscriptions.getInscriptions();
+		Personne Personne = inscri.createPersonne("a", "b", "c");
+		Equipe Equipe = inscri.createEquipe("1");
+		Equipe Equipe1 = inscri.createEquipe("2");
+		Equipe.add(Personne);
+		Equipe1.add(Personne);
+		assertTrue(Personne.getEquipes().contains(Equipe));
+		assertTrue(Personne.getEquipes().contains(Equipe1));
+		
 
-	@Test
-	public void testAddEquipe() {
-		fail("Not yet implemented");
 	}
-
-	@Test
-	public void testRemoveEquipe() {
-		fail("Not yet implemented");
-	}
+		    
 
 }

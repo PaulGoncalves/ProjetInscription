@@ -6,7 +6,7 @@ public class BaseDeDonneeJdbc
 	public static void main (String[] args)
 	{
 		try{
-			//Chargement du dirver
+			//Chargement du driver
 			Class.forName("com.mysql.jdbc.Driver");
 			//Info de connexion à la base de donnée
 			String url = "jdbc:mysql://localhost:3306/inscriptionsportive";
@@ -20,11 +20,12 @@ public class BaseDeDonneeJdbc
 			ResultSet resultat = stmt.executeQuery("SELECT * FROM personne, candidat");
 				while (resultat.next())
 				{
-						System.out.println(resultat.getString("prenom_personne") + ", " + resultat.getString("mail") + ", " + resultat.getString("nom_candidat"));
+					System.out.println(resultat.getString("prenom_personne") + ", " + resultat.getString("mail") + ", " + resultat.getString("nom_candidat"));
 				}
 			}
 		catch (Exception exc){
 			exc.printStackTrace();
+			System.out.println("Erreur de connexion à la base de donnée");
 		}
 	}
 }

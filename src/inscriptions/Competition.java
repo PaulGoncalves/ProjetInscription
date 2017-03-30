@@ -1,8 +1,10 @@
 package inscriptions;
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -17,11 +19,11 @@ public class Competition implements Comparable<Competition>, Serializable
 	private static final long serialVersionUID = -2882150118573759729L;
 	private Inscriptions inscriptions;
 	private String nom;
-	private Set<Candidat> candidats;
-	private LocalDate dateCloture;
+	private Set<Candidat> candidats;//????????
+	private Date dateCloture;
 	private boolean enEquipe = false;
 
-	Competition(Inscriptions inscriptions, String nom, LocalDate dateCloture, boolean enEquipe)
+	Competition(Inscriptions inscriptions, String nom, Date dateCloture, boolean enEquipe)
 	{
 		this.enEquipe = enEquipe;
 		this.inscriptions = inscriptions;
@@ -41,32 +43,11 @@ public class Competition implements Comparable<Competition>, Serializable
 	}
 	
 	/**
-	 * Modifie le nom de la compétition.
-	 */
-	
-	public void setNom(String nom)
-	{
-		this.nom = nom ;
-	}
-	
-	/**
-	 * Retourne vrai si les inscriptions sont encore ouvertes, 
-	 * faux si les inscriptions sont closes.
-	 * @return
-	 */
-	
-	public boolean inscriptionsOuvertes()
-	{
-		// TODO retourner vrai si et seulement si la date système est antérieure à la date de clôture.
-		return true;
-	}
-	
-	/**
 	 * Retourne la date de cloture des inscriptions.
 	 * @return
 	 */
 	
-	public LocalDate getDateCloture()
+	public Date getDateCloture()
 	{
 		return dateCloture;
 	}
@@ -87,12 +68,31 @@ public class Competition implements Comparable<Competition>, Serializable
 	 * @param dateCloture
 	 */
 	
-	public void setDateCloture(LocalDate dateCloture)
+	public void setDateCloture(Date dateCloture)
 	{
 		// TODO vérifier que l'on avance pas la date.
-		this.dateCloture = dateCloture;
+		
+		if (this.getDateCloture() == null)
+			this.dateCloture = dateCloture;
+		else if(dateCloture.after(this.getDateCloture()))
+			this.dateCloture = dateCloture;
 	}
 	
+	/**
+	 * TODO retourne true si les inscriptions sont toujours ouvertes.
+	 * Dans le cas contraire retourne false.
+	 */
+	
+	public boolean inscriptionEstOuverte ()
+	{
+		Date today =  Calendar.getInstance().getTime();
+		
+		if(this.getDateCloture().before(today))
+		{
+			return false;
+		}
+		return true;
+	}
 	/**
 	 * Retourne l'ensemble des candidats inscrits.
 	 * @return
@@ -105,8 +105,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	/**
 	 * Inscrit un candidat de type Personne à la compétition. Provoque une
-	 * exception si la compétition est réservée aux équipes ou que les 
-	 * inscriptions sont closes.
+	 * exception si la compétition est réservée aux équipes.
 	 * @param personne
 	 * @return
 	 */
@@ -114,16 +113,27 @@ public class Competition implements Comparable<Competition>, Serializable
 	public boolean add(Personne personne)
 	{
 		// TODO vérifier que la date de clôture n'est pas passée
-		if (enEquipe)
-			throw new RuntimeException();
+		
+		Date today = Calendar.getInstance().getTime();
+		if(this.getDateCloture() == null)
+		{
+			personne.add(this);
+			return candidats.add(personne);
+		}
+		else if(today.before(this.getDateCloture()))
+		{
+				if (enEquipe)
+				{
+					throw new RuntimeException();
+				}	
+		}
 		personne.add(this);
 		return candidats.add(personne);
 	}
 
 	/**
 	 * Inscrit un candidat de type Equipe à la compétition. Provoque une
-	 * exception si la compétition est réservée aux personnes ou que 
-	 * les inscriptions sont closes.
+	 * exception si la compétition est réservée aux personnes.
 	 * @param personne
 	 * @return
 	 */
@@ -131,8 +141,20 @@ public class Competition implements Comparable<Competition>, Serializable
 	public boolean add(Equipe equipe)
 	{
 		// TODO vérifier que la date de clôture n'est pas passée
-		if (!enEquipe)
-			throw new RuntimeException();
+		
+		Date today = Calendar.getInstance().getTime();
+		if(this.getDateCloture() == null)
+		{
+			equipe.add(this);
+			return candidats.add(equipe);
+		}
+		if(today.before(this.getDateCloture()))
+		{
+			if (!enEquipe)
+			{
+				throw new RuntimeException();
+			}	
+		}
 		equipe.add(this);
 		return candidats.add(equipe);
 	}

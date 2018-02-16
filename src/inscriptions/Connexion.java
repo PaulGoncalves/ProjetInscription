@@ -37,12 +37,12 @@ public class Connexion {
 		try
 		{
 			Connection connexion = DriverManager.getConnection("jdbc:mysql://localhost/inscriptionsportive", "root","");
-			//Connection connexion = DriverManager.getConnection("jdbc:mysql://mysql.m2l.local/dmerigou", "dmerigou","GP2dC3US");
+			//Connection connexion = DriverManager.getConnection("jdbc:mysql://mysql.m2l.local/dmerigou", "root","mdp");
 			this.connexion = connexion;
 
 			
 
-			System.out.println("vous etes connect� h�h�!");
+			System.out.println("vous etes connecté !");
 
 
 		}
@@ -96,7 +96,7 @@ public class Connexion {
 	public static HashMap<String, Integer>  AfficherLesCandidats()
 	{
 		HashMap<String, Integer> maliste = new LinkedHashMap<String, Integer>();
-		//utilisation d'une hashMap car elle est tri�e par ordre d'insertion dans la bdd
+		//utilisation d'une hashMap car elle est trié par ordre d'insertion dans la bdd
 		try
 		{
 			Statement statement = null;
@@ -605,11 +605,11 @@ public class Connexion {
 			int ajoutCand = statement.executeUpdate( "INSERT INTO `candidat`(`cand_nom`) VALUES ('"+nom+"') ");
 			if(ajoutCand == 1)
 			{
-				System.out.println( "ajout candidat r�ussi..");
+				System.out.println( "ajout candidat réussi..");
 			}
 			else
 			{
-				System.out.println( "ajout candidat foir�!!");
+				System.out.println( "ajout candidat n'a pas fontionné!!");
 			}
 		
 		}
@@ -717,7 +717,7 @@ public class Connexion {
 		        	int ModifCand = statement.executeUpdate( "UPDATE candidat SET cand_nom = '"+ nouveauNom +"' WHERE cand_nom='"+ ancienNom +"'" );
 		        	if(ModifCand == 1)
 		        	{
-		        		System.out.println("____La modification a �t� prise en compte____" );
+		        		System.out.println("____La modification a été prise en compte____" );
 		        	}	
 		        
 		}
@@ -792,7 +792,7 @@ public class Connexion {
 		        	int ModifCand = statement.executeUpdate( "UPDATE competition SET compet_nom = '"+ nouveauNom +"' WHERE compet_nom='"+ ancienNom +"'" );
 		        	if(ModifCand == 1)
 		        	{
-		        		System.out.println("____La modification du nom de la competition a �t� prise en compte____" );
+		        		System.out.println("____La modification du nom de la competition a été prise en compte____" );
 		        	}	
 		        
 		}
@@ -816,7 +816,7 @@ public class Connexion {
 		    int ModifCand = statement.executeUpdate( "UPDATE candidat SET cand_nom = '"+ nouveauNom +"' WHERE cand_nom='"+ ancienNom +"'" );
 		    if(ModifCand == 1)
 		    {
-		        System.out.println("____La modification du nom de l'�quipe a �t� prise en compte____" );
+		        System.out.println("____La modification du nom de l'équipe a bien été prise en compte____" );
 		    }	
 		        
 		}
@@ -1048,7 +1048,7 @@ public class Connexion {
 						
 					if(insertPersEquipe == 1)
 					{
-						System.out.println("____Vous vous �tes bien inscrit dans l'equipe n�"+idEquipe+"");
+						System.out.println("____Vous vous �tes bien inscrit dans l'equipe n°"+idEquipe+"");
 					}
 					else
 					{
@@ -1118,7 +1118,7 @@ public class Connexion {
 	        	String Nom = resultat.getString("cand_nom");
 
 	        	 maliste.put(Nom, idEquipe);
-	        	System.out.println("Equipe n�"+ idEquipe + " - " + Nom);
+	        	System.out.println("Equipe n°"+ idEquipe + " - " + Nom);
 
 
 	        }
@@ -1179,7 +1179,7 @@ public class Connexion {
 		        	int SupprCand = statement.executeUpdate( "DELETE FROM candidat WHERE id_cand = "+ id +"" );
 		        	if(SupprCand == 1)
 		        	{
-		        		System.out.println("La suppression de l'equipe a bien ete prise en compte" );
+		        		System.out.println("La suppression de la personne a bien ete prise en compte" );
 		        	}	
 		        }
 		        else{
